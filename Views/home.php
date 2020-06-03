@@ -1,0 +1,1 @@
+<h1> Bem vindo meu nome dinâmico chamado: <?php echo $name ?> </h1>
