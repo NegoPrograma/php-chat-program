@@ -8,7 +8,7 @@ $config = array();
 
 
 if(ENV == "development"){
-    $config['dbname'] = 'fsphp';
+    $config['dbname'] = 'chatsys';
     $config['host'] = 'localhost';
     $config['dbuser'] = 'root';
     $config['dbpass'] = "";

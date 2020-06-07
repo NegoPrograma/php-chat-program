@@ -25,6 +25,5 @@
       ?>;"></div>
     <?php $this->loadView($viewName,$viewData); ?>
 
-    <footer>Rodapé foda</footer>
 </body>
 </html>
