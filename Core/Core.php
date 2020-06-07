@@ -20,11 +20,11 @@ class Core {//extends Controller{
         $url =  end($url);
         $params = array();
         
-        if(!empty($url) && $url != "/"){
+        if(!empty($url) && $url != '/'){
             $url = explode("/",$url);
             array_shift($url);
 
-          $currentController = $url[0] ."Controller";
+          $currentController = ucfirst($url[0]) ."Controller";
 
           if(isset($url[1])){
               $currentAction = $url[1];

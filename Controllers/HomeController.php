@@ -10,13 +10,7 @@ class HomeController extends Controller {
 
     
     public function index(){
-        $user = new UserModel();
-        $user->setName("isaac");
-        echo "bem vindo, usuário chamado ". $user->getName();
-        $this->data = [
-            "name" => $user->getName()
-        ];
-
+    
         $this->loadTemplate("home",$this->data);
     }
 

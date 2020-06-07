@@ -1,0 +1,48 @@
+body{
+    margin:0;
+}
+
+.enviroment {
+    background-color: #000000;
+    height: 15px;
+}
+
+.table th {
+    text-align: left;
+}
+
+.chatbutton {
+    cursor: pointer;
+    width: 200px;
+    height: 40px;
+    background-color: #03f4ff;
+    text-align: center;
+    line-height: 40px;
+    position: fixed;
+    bottom: 0;
+    right: 50px;
+}
+
+.message-box{
+    height: 340px;
+    width: 100%;
+    background-color: #DDD;
+    overflow-y: scroll;
+}
+
+.input{
+    height: 50px;
+    background-color: #FFF;
+}
+
+#msg{
+    margin:0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 15px;
+}
+
+.msgballon{
+    margin-bottom: 7px;
+}
