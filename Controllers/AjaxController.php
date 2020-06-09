@@ -11,15 +11,21 @@ class AjaxController extends Controller{
     public function sendmessage(){
         $messageModel =  new MessageModel();
         $origin;
+        $callId;
         if(isset($_POST['msg']) && !empty($_POST['msg'])){
+            
             $msg = addslashes($_POST['msg']);
-            $callId = $_SESSION['chatwindow'];
-            if($_SESSION['area'] == 'suporte'){
+
+            if(!isset($_POST['call_id']))
+                $callId = $_SESSION['chatwindow'];
+            else
+                $callId = $_POST['call_id'];
+
+            if($_SESSION['area'] == 'suporte')
                 $origin = 0;
-            }
-            else{
+            else
                 $origin = 1;
-            }
+            
             $messageModel->sendMessage($callId,$origin,$msg);
         }
     }
@@ -27,8 +33,11 @@ class AjaxController extends Controller{
     public function getmessages(){
         $messageModel = new MessageModel();
         $callModel = new CallModel();
-        
-        $callId = $_SESSION['chatwindow'];
+        if(!isset($_POST['call_id']))
+            $callId = $_SESSION['chatwindow'];
+        else
+            $callId = $_POST['call_id'];
+            
         $lastmsg = $callModel->getLastMessage($callId,$_SESSION['area']);
 
         echo json_encode($messageModel->getMessages($callId,$lastmsg));

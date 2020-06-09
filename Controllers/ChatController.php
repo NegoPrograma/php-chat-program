@@ -19,6 +19,7 @@ class ChatController extends Controller {
             $id = addslashes(substr($_GET['id'],32));
             $callModel->statusUpdate($id,'1');
             $_SESSION['chatwindow'] = $id;
+            $_SESSION['id_list'][] = $id;
         }
         elseif(isset($_POST['name']) && !empty($_POST['name'])){
             $name = addslashes($_POST['name']);

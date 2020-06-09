@@ -30,7 +30,7 @@ function getCalls(){
 
 function openChatSupport(object){
     let id = $(object).closest('.calls').attr("data-id");
-    window.open("chat?id="+id,"chatWindow","width=450,height=450");
+    window.open("chat?id="+id,"chatWindow"+id,"width=450,height=450");
 }
 
 
@@ -43,25 +43,40 @@ function keyUpChat(obj,event){
     if(event.keyCode == 13){// Tecla Enter
         let msg = obj.value;
         obj.value = '';
-        let time = new Date();
-      //  let hour = time.getHours()+":"+time.getMinutes();
-        //let name = $('.input').attr('data-name');
-        //$('.message-box').append(" <div class='msg-ballon'>"+hour+" <strong>"+name+"</strong> "+msg+"</div>");
-        
-        $.ajax({
-            url:'index.php/ajax/sendmessage',
-            type:'POST',
-            data:{
-                msg:msg
-            }
-        })
+        if(window.location.toString().includes("=")){
+            $.ajax({
+                url:'index.php/ajax/sendmessage',
+                type:'POST',
+                data:{
+                    msg:msg,
+                    call_id:window.location.toString().split("=")[1].substring(32)
+                }
+            });
+        }
+        else{
+            $.ajax({
+                url:'index.php/ajax/sendmessage',
+                type:'POST',
+                data:{
+                    msg:msg
+                }
+            });
+        }
     }
 }
 
     function checkForNewMessages(){
+        let call_id;
+        if(window.location.toString().includes("=")){
+            call_id = window.location.toString().split("=")[1].substring(32);
+        }
         $.ajax({
             url:'index.php/ajax/getmessages',
+            type:'POST',
             dataType:'json',
+            data:{
+                call_id: call_id
+            },
             success:function(res){
                 if(res.length > 0)
                     for(let i in res){
@@ -73,11 +88,11 @@ function keyUpChat(obj,event){
                             name = "Suporte";                         
                         $('.message-box').append(" <div class='msg-ballon'>"+time+" <strong>"+name+"</strong> "+res[i].message+"</div>");
                     }
-                    $('.message-box').scrollTop($('.message-box')[0].scrollHeight());
-                setTimeout(checkForNewMessages,1000);
+                //$('.message-box').scrollTop($('.message-box')[0].scrollHeight());
+                setTimeout(checkForNewMessages,3000);
             },
             error:function(){
-                setTimeout(checkForNewMessages,1000);
+                setTimeout(checkForNewMessages,3000);
             }
         })
     }
